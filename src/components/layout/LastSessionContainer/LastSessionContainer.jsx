@@ -3,7 +3,7 @@ import {Container} from "../../ui/index.jsx";
 
 function LastSessionContainer() {
     return (
-        <Container alignment={'right'}>
+        <Container containerStyles={{backgroundColor: '#4CB963'}}>
             <p>Ось ваші останні проведені двобої:</p>
         </Container>
     );

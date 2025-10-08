@@ -1,15 +1,14 @@
 import './Container.css'
-import {evaluateMargin} from "../../../utilities/evaluateMargin.js";
 
-function Container({alignment = 'left',bgColor ='#4CB963' ,children}) {
-   let margin = evaluateMargin(alignment);
+function Container({bgGround, containerStyles={},contentStyles={}, children}) {
 
     return (
-        <div style={{margin: margin,  backgroundColor: bgColor }}  className='container'>
-            <div className='content-block' >
+        <div className='container' style={containerStyles}>
+            <div className='content-block' style={contentStyles}>
                 {children}
             </div>
         </div>
     )
 }
+
 export {Container}
