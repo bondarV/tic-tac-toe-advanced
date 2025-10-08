@@ -1,6 +1,6 @@
 import './Container.css'
 
-function Container({bgGround, containerStyles={},contentStyles={}, children}) {
+function Container({ containerStyles={}, contentStyles={}, children}) {
 
     return (
         <div className='container' style={containerStyles}>
