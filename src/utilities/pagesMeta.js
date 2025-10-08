@@ -1,7 +1,7 @@
 const pages = [
-  { name: 'Introduction', id: crypto.randomUUID() },
-    {name: 'Leaderboard', id: crypto.randomUUID() },
-    {name: 'Settings', id: crypto.randomUUID() },
+    {name: 'Introduction', id: crypto.randomUUID(), url: '/introduction'},
+    {name: 'Leaderboard', id: crypto.randomUUID(), url: '/leaderboard'},
+    {name: 'Settings', id: crypto.randomUUID(), url: '/settings'},
 ];
 
-export { pages };
+export {pages};

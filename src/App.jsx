@@ -6,7 +6,7 @@ import {IntroductionPage} from "./pages/IntroductionPage/IntroductionPage.jsx";
 function App() {
   return (
     <>
-        <NavBar pages={pages} />
+        <NavBar pages={pages}/>
         <IntroductionPage/>
     </>
   );
