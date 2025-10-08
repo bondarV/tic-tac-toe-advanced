@@ -1,6 +1,7 @@
 import './NavItem.css'
+import {ListItem} from "../../../ui/ListItem/ListItem.jsx";
 function NavItem({name, url,className}) {
-    return <li className={className}><a href={url}>{name}</a></li>;
+    return <ListItem className={className}><a href={url}>{name}</a></ListItem>;
 }
 
 export {NavItem};

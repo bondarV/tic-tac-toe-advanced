@@ -1,6 +1,6 @@
 import './Introduction.module.css'
-import {LastSessionContainer} from "../../components/layout/index.jsx";
-import {Button, Container} from "../../components/ui/index.jsx";
+import {GameSelection, LastSessionContainer} from "../../components/layout";
+import { Container} from "../../components/ui";
 
 function IntroductionPage() {
     const styles = {
@@ -11,7 +11,7 @@ function IntroductionPage() {
     return (
         <>
             <Container contentStyles={styles}>
-                <Button label={'Перейти до вибору режиму гри'}/>
+                <GameSelection/>
                 <LastSessionContainer/>
             </Container>
         </>

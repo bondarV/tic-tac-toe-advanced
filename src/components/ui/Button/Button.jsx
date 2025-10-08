@@ -1,8 +1,9 @@
 import './Button.css'
 
-function Button({label, styles}) {
+function Button({label, styles = '',onClick}) {
+        console.log('Button onClick:', onClick); // Перевірте чи передається
     return (
-        <button {...styles}>{label}</button>
+        <button onClick={onClick} {...styles}>{label}</button>
     );
 }
 

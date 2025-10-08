@@ -1,9 +1,6 @@
 .nav{
     margin: 1rem auto;
-    list-style: none;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
     justify-content: space-evenly;
     background-color: orange;
     border-radius: 10px;
