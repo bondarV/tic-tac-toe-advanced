@@ -1,0 +1,18 @@
+.nav{
+    width: 70%;
+    margin: 1rem auto;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: orange;
+    border-radius: 10px;
+    li{
+        font-size: 2rem;
+        font-family: 'Montserrat', sans-serif;
+        &:hover{
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}

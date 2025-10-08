@@ -1,29 +1,13 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import { pages } from './utilities/pagesMeta';
+import {NavBar} from "./components/layout/index.jsx";
+import {IntroductionPage} from "./pages/IntroductionPage/IntroductionPage.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Deeply - trepidation</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>For mile or two</p>
-      </div>
-      <p className="read-the-docs"></p>
+        <NavBar pages={pages} />
+        <IntroductionPage/>
     </>
   );
 }
