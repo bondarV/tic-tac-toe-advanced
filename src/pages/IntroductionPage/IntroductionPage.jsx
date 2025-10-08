@@ -1,6 +1,10 @@
 import './Introduction.module.css'
+import {LastSessionContainer} from "../../components/layout/index.jsx";
+
 function IntroductionPage() {
-  return <div className="IntroductionPage"></div>
+    return (
+        <LastSessionContainer/>
+    )
 }
 
-export { IntroductionPage };
+export {IntroductionPage};
