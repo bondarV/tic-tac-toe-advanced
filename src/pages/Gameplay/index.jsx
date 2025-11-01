@@ -1,7 +1,7 @@
-function  Index() {
+function  Gameplay() {
     return (
         <div></div>
     );
 }
 
-export { Index };
+export { Gameplay };

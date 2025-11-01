@@ -1,16 +1,15 @@
-import styles from './Introduction.module.css'
-import {GameSelection, LastSessionContainer} from "../../components/layout";
-import { Container} from "../../components/ui";
+import styles from './index.module.css'
+import {GameSelection} from "./GameSelection/GameSelection.jsx";
 
-function Index() {
+function Introduction() {
+
     return (
         <>
-            <Container {...styles}>
+            <div style={styles.IntroductionPage}>
                 <GameSelection/>
-                <LastSessionContainer/>
-            </Container>
+            </div>
         </>
     )
 }
 
-export {Index};
+export {Introduction};

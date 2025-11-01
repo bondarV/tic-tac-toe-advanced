@@ -1,7 +1,3 @@
-.list-flex{
-    display: flex;
-    flex-wrap: wrap;
-}
 .games-list{
     flex-direction: column;
     gap: 20px;

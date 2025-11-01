@@ -1,9 +1,7 @@
-import {Container} from "../../components/ui/index.jsx";
-
-function Index() {
+function Stats() {
     return (
-        <Container containerStyles={{backgroundColor: 'white'}}
-                   contentStyles={{display: "flex", flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{backgroundColor: 'white'}}
+        >
             <h1>Choose the next settings for game:</h1>
             <form action="">
                 <div>
@@ -13,9 +11,9 @@ function Index() {
                     <input type="radio" className="type" name='mode' value="Light"/>
                 </div>
             </form>
-        </Container>
+        </div>
 
     )
 }
 
-export {Index};
+export {Stats};

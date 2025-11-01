@@ -1,7 +1,7 @@
-import './ListItem.css'
+import styles from './ListItem.module.css'
 function ListItem({className = '',children}) {
     return (
-        <li className={`list-item ${className}`}>
+        <li className={`${styles.listItem} ${className}`}>
             {children}
         </li>
     );
