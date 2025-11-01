@@ -1,6 +1,6 @@
 import {Container} from "../../components/ui/index.jsx";
 
-function SettingsPage() {
+function Index() {
     return (
         <Container containerStyles={{backgroundColor: 'white'}}
                    contentStyles={{display: "flex", flexDirection: 'column', alignItems: 'center'}}>
@@ -18,4 +18,4 @@ function SettingsPage() {
     )
 }
 
-export {SettingsPage};
+export {Index};

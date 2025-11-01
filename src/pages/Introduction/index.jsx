@@ -1,16 +1,11 @@
-import './Introduction.module.css'
+import styles from './Introduction.module.css'
 import {GameSelection, LastSessionContainer} from "../../components/layout";
 import { Container} from "../../components/ui";
 
-function IntroductionPage() {
-    const styles = {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-    }
+function Index() {
     return (
         <>
-            <Container contentStyles={styles}>
+            <Container {...styles}>
                 <GameSelection/>
                 <LastSessionContainer/>
             </Container>
@@ -18,4 +13,4 @@ function IntroductionPage() {
     )
 }
 
-export {IntroductionPage};
+export {Index};
