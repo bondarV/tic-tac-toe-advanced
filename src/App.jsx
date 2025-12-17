@@ -1,15 +1,20 @@
 import './App.css';
-import {pages} from './utilities/data/pagesMeta.js';
+import {componentsPages} from './data/pagesMeta.js';
 import {NavBar} from "./components/layout/index.jsx";
-import {IntroductionPage} from "./pages/IntroductionPage/IntroductionPage.jsx";
-import {ListDisplay} from "./components/ui/ListDisplay/ListDisplay.jsx";
-import {SettingsPage} from "./pages/SettingsPage/SettingsPage.jsx";
+import {useState} from "react";
 
 function App() {
+    const defaultPage = 'start';
+    const [currentPage, setCurrentPage] = useState(defaultPage);
+
+    const ActivePage = componentsPages[currentPage];
+
     return (
         <>
-            <NavBar pages={pages}/>
-            <SettingsPage/>
+            <NavBar pages={Object.keys(componentsPages)}
+                    changeActivePage={setCurrentPage}
+            />
+            {ActivePage}
         </>
     );
 }
