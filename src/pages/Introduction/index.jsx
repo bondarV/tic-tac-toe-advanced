@@ -1,15 +1,14 @@
 import styles from './index.module.css'
-import {GameSelection} from "./GameSelection/GameSelection.jsx";
+import {GameSelection} from "./GameSelection.jsx";
 
-function Introduction() {
+export function Introduction() {
 
     return (
         <>
-            <div style={styles.IntroductionPage}>
+            <div className={styles.introductionPageContainer}>
                 <GameSelection/>
             </div>
         </>
     )
 }
 
-export {Introduction};

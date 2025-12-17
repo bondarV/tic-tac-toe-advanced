@@ -1,16 +1,11 @@
 import styles from './NavBar.module.css'
-import {NavItem} from './NavItem/NavItem';
-import {ListDisplay} from "../../form/index.jsx";
+import {DisplayList} from "../../form/lists/DisplayList/DisplayList.jsx";
 
 function NavBar({pages}) {
     return (
-        <>
-            <ListDisplay className={styles.nav}>
-                {pages.map((page) => (
-                    <NavItem  key={page.id} id={page.id} url={page.url} name={page.name}/>
-                ))}
-            </ListDisplay>
-        </>
+        <nav>
+            <DisplayList items={pages}/>
+        </nav>
     );
 }
 

@@ -1,4 +1,4 @@
-import  {ListItem} from "./ListItem/ListItem.jsx";
-import  {ListDisplay} from "./ListDisplay/ListDisplay.jsx";
+import  {ListItem} from "./lists/ListItem/ListItem.jsx";
+import  {SelectableList} from "./lists/SelectableList/SelectableList.jsx";
 
-export {ListDisplay,ListItem}
+export {SelectableList,ListItem}
