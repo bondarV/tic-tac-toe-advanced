@@ -1,3 +1,29 @@
-.button{
+.button {
     border: none;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius, 10px);
+    cursor: pointer;
+    transition: var(--transition, all 0.3s ease);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid transparent;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-color: var(--color-accent, black);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.button:focus {
+    outline: 2px solid var(--color-accent, black);
+    outline-offset: 2px;
 }

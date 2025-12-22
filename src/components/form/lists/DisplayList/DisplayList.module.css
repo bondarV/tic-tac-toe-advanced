@@ -1,2 +1,30 @@
-ul{
+.displayList {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md, 1rem);
+    flex-wrap: wrap;
+    padding: var(--spacing-md, 1rem);
+}
+
+.displayList a {
+    text-decoration: none;
+    color: var(--color-text, #1a1a1a);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: var(--transition, all 0.3s ease);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid transparent;
+}
+
+.displayList a:hover {
+    background-color: var(--color-secondary, #FF8C00);
+    color: white;
+    border-color: var(--color-accent, black);
+    transform: scale(1.05);
+}
+
+.displayList a:focus {
+    outline: 2px solid var(--color-accent, black);
+    outline-offset: 2px;
 }
