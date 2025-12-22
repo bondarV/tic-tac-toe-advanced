@@ -1,4 +1,17 @@
 .gamesList {
+    display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: var(--spacing-md, 1rem);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (max-width: 640px) {
+    .gamesList {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }

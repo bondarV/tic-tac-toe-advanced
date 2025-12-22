@@ -1,10 +1,9 @@
-import styles from './NavBar.module.css'
 import {DisplayList} from "../../form/lists/DisplayList/DisplayList.jsx";
 
-function NavBar({pages}) {
+function NavBar({pages, changeActivePage}) {
     return (
         <nav>
-            <DisplayList items={pages}/>
+            <DisplayList changeActivePage={changeActivePage} items={pages}/>
         </nav>
     );
 }

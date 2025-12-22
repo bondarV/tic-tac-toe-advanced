@@ -1,11 +1,21 @@
 import {ListItem} from "../ListItem/ListItem.jsx";
+import styles from "./DisplayList.module.css";
 
-function DisplayList({className = '', itemClassName = '', items = []}) {
+function DisplayList({items = [], changeActivePage = null}) {
     return (
-        <ul className={className} style={{display: "flex", justifyContent: "space-between"}}>
-            {items.map((item) => (
-                <ListItem className={itemClassName} key={item.id}>
-                    <a href={item.url} title={item.name}>{item.name}</a>
+        <ul className={styles.displayList}>
+            {Object.values(items).map(item => (
+                <ListItem key={item.id}>
+                    <a
+                        onClick={(e) => {
+                            e.preventDefault();
+                            changeActivePage?.(item.id);
+                        }}
+                        href={item.url}
+                        title={item.title}
+                    >
+                        {item.title}
+                    </a>
                 </ListItem>
             ))}
         </ul>
