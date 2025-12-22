@@ -1,11 +1,13 @@
-.list-item {
+.listItem {
     font-size: 2rem;
     font-family: 'Montserrat', sans-serif;
     list-style: none;
+
     &:hover {
         cursor: pointer;
     }
-    a{
+
+    a {
         text-decoration: none;
     }
 }
