@@ -1,7 +1,73 @@
+import {useEffect} from 'react';
+import {useTicTacToe} from '@/hooks/useTicTacToe.js';
+import {useTimer} from '@/hooks/useTimer';
+import {Button} from '@/components/ui';
+import {GAME_STATUS} from '@/constants/game';
+import styles from './Gameplay.module.css';
+
 function Gameplay() {
+    const {gameState, handleMove, resetGame} = useTicTacToe();
+    const {seconds, start, stop, reset: resetTimer} = useTimer();
+
+    // Зупиняємо таймер, коли гра завершується
+    useEffect(() => {
+        if (gameState.status !== GAME_STATUS.IN_PROGRESS) {
+            stop();
+        }
+    }, [gameState.status, stop]);
+
+    const onCellClick = (index) => {
+        // Запускаємо таймер при першому ході
+        if (seconds === 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
+            start();
+        }
+        handleMove(index);
+    };
+
+    const onRestart = () => {
+        resetGame();
+        resetTimer();
+    };
+
+    const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        return `${mins}:${s < 10 ? '0' : ''}${s}`;
+    };
+
     return (
-        <div>
-            <h1>Гра почалася</h1>
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <div>Time: {formatTime(seconds)}</div>
+                <div>
+                    {gameState.status === GAME_STATUS.WIN && `Winner: ${gameState.winner}`}
+                    {gameState.status === GAME_STATUS.DRAW && 'Draw!'}
+                    {gameState.status === GAME_STATUS.IN_PROGRESS &&
+                        `Turn: ${gameState.isXNext ? 'X' : 'O'}`}
+                </div>
+            </div>
+
+            <div className={styles.board}>
+                {gameState.board.map((cell, index) => {
+                    const isWinningCell = gameState.winningLine?.includes(index);
+                    return (
+                        <button
+                            key={index}
+                            className={`${styles.cell} ${isWinningCell ? styles.winning : ''}`}
+                            onClick={() => onCellClick(index)}
+                            disabled={!!cell || gameState.status !== GAME_STATUS.IN_PROGRESS}
+                        >
+                            {cell}
+                        </button>
+                    );
+                })}
+            </div>
+
+            <Button
+                label="Restart Game"
+                onClick={onRestart}
+                className={styles.restartBtn}
+            />
         </div>
     );
 }
