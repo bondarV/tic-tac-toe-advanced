@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {useTicTacToe} from '@/hooks/useTicTacToe';
+import {useTicTacToe} from '@/hooks/useTicTacToe.js';
 import {useTimer} from '@/hooks/useTimer';
 import {Button} from '@/components/ui';
 import {GAME_STATUS} from '@/constants/game';
