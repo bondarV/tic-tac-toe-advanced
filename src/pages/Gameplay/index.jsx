@@ -1,7 +1,9 @@
-function  Gameplay() {
+function Gameplay() {
     return (
-        <div></div>
+        <div>
+            <h1>Гра почалася</h1>
+        </div>
     );
 }
 
-export { Gameplay };
+export {Gameplay};
