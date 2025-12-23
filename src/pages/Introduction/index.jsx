@@ -1,13 +1,14 @@
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import styles from './index.module.css';
-// import {GameSelection} from "./GameSelection.jsx"; // ВИДАЛИТИ
 import {SettingsForm} from "@/components/form/SettingsForm/SettingsForm.jsx";
 import {Button} from "@/components/ui";
-import {useGameSettings} from "@/hooks/useGameSettings.js";
+import {useGame} from "@/context/GameContext";
 
-export function Introduction({onNavigate}) {
+export function Introduction() {
     const [view, setView] = useState('menu');
-    const {settings, saveSettings} = useGameSettings();
+    const {settings, saveSettings} = useGame();
+    const navigate = useNavigate();
 
     const handleSaveSettings = (newSettings) => {
         saveSettings(newSettings);
@@ -22,7 +23,7 @@ export function Introduction({onNavigate}) {
                     <div className={styles.menuButtons}>
                         <Button
                             label="Грати"
-                            onClick={() => onNavigate('game')}
+                            onClick={() => navigate('/game')}
                             className={styles.menuBtn}
                         />
                         <Button
