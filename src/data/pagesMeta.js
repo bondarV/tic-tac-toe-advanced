@@ -1,5 +1,4 @@
 import {Introduction} from "@/pages/Introduction/index.jsx";
-import {Stats} from "@/pages/Stats/index.jsx";
 import {Gameplay} from "@/pages/Gameplay/index.jsx";
 
 const componentsPages = {
@@ -15,12 +14,6 @@ const componentsPages = {
         url: '/game',
         id: 'game',
         hidden: true
-    },
-    results: {
-        component: Stats,
-        title: 'Статистика',
-        url: '/results',
-        id: 'results'
     },
 };
 
