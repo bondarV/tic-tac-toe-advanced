@@ -1,24 +1,43 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useTicTacToe} from '@/hooks/useTicTacToe.js';
 import {useTimer} from '@/hooks/useTimer';
+import {useGameSettings} from '@/hooks/useGameSettings';
 import {Button} from '@/components/ui';
+import {Modal} from '@/components/common/Modal/Modal.jsx';
 import {GAME_STATUS} from '@/constants/game';
 import styles from './Gameplay.module.css';
 
-function Gameplay() {
-    const {gameState, handleMove, resetGame} = useTicTacToe();
+function Gameplay({onNavigate}) {
+    const {settings} = useGameSettings();
+    const {gameState, handleMove, resetGame, handleTimeUp} = useTicTacToe(settings.gridSize);
     const {seconds, start, stop, reset: resetTimer} = useTimer();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Зупиняємо таймер, коли гра завершується
+
+    useEffect(() => {
+        if (settings.timeLimit > 0 && seconds >= settings.timeLimit && gameState.status === GAME_STATUS.IN_PROGRESS) {
+            handleTimeUp();
+        }
+    }, [seconds, settings.timeLimit, gameState.status, handleTimeUp]);
+
+
+    useEffect(() => {
+        if (settings.timeLimit > 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
+            resetTimer();
+            start();
+        }
+    }, [gameState.isXNext, settings.timeLimit, gameState.status, resetTimer, start]);
+
+
     useEffect(() => {
         if (gameState.status !== GAME_STATUS.IN_PROGRESS) {
             stop();
+            setIsModalOpen(true);
         }
     }, [gameState.status, stop]);
 
     const onCellClick = (index) => {
-        // Запускаємо таймер при першому ході
-        if (seconds === 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
+        if (settings.timeLimit === 0 && seconds === 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
             start();
         }
         handleMove(index);
@@ -27,6 +46,7 @@ function Gameplay() {
     const onRestart = () => {
         resetGame();
         resetTimer();
+        setIsModalOpen(false);
     };
 
     const formatTime = (secs) => {
@@ -35,19 +55,33 @@ function Gameplay() {
         return `${mins}:${s < 10 ? '0' : ''}${s}`;
     };
 
+    const getWinnerText = () => {
+        if (gameState.status === GAME_STATUS.DRAW) return "Нічия!";
+        if (gameState.status === GAME_STATUS.TIME_UP) {
+            const winnerName = gameState.winner === 'X' ? settings.playerX : settings.playerO;
+            return `Час вичерпано! Переможець: ${winnerName}!`;
+        }
+        const winnerName = gameState.winner === 'X' ? settings.playerX : settings.playerO;
+        return `Переможець: ${winnerName}!`;
+    };
+
+    const timeDisplay = settings.timeLimit > 0
+        ? Math.max(0, settings.timeLimit - seconds)
+        : seconds;
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <div>Time: {formatTime(seconds)}</div>
+                <div>Час: {formatTime(timeDisplay)}</div>
                 <div>
-                    {gameState.status === GAME_STATUS.WIN && `Winner: ${gameState.winner}`}
-                    {gameState.status === GAME_STATUS.DRAW && 'Draw!'}
-                    {gameState.status === GAME_STATUS.IN_PROGRESS &&
-                        `Turn: ${gameState.isXNext ? 'X' : 'O'}`}
+                    Хід: {gameState.isXNext ? settings.playerX : settings.playerO} ({gameState.isXNext ? 'X' : 'O'})
                 </div>
             </div>
 
-            <div className={styles.board}>
+            <div
+                className={styles.board}
+                style={{gridTemplateColumns: `repeat(${settings.gridSize}, 1fr)`}}
+            >
                 {gameState.board.map((cell, index) => {
                     const isWinningCell = gameState.winningLine?.includes(index);
                     return (
@@ -63,11 +97,31 @@ function Gameplay() {
                 })}
             </div>
 
-            <Button
-                label="Restart Game"
-                onClick={onRestart}
-                className={styles.restartBtn}
-            />
+            <div className={styles.actions}>
+                <Button
+                    label="Почати знову"
+                    onClick={onRestart}
+                />
+                <Button
+                    label="В меню"
+                    onClick={() => onNavigate('start')}
+                />
+            </div>
+
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Гра завершена"
+            >
+                <div style={{textAlign: 'center'}}>
+                    <h3>{getWinnerText()}</h3>
+                    <p>Час гри: {formatTime(seconds)}</p>
+                    <div style={{marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center'}}>
+                        <Button label="Зіграти ще раз" onClick={onRestart}/>
+                        <Button label="Вийти в меню" onClick={() => onNavigate('start')}/>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 }

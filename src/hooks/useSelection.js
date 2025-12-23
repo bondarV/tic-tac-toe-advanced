@@ -21,9 +21,9 @@ export const useSelection = () => {
 
     return {
         showSelection,
-        selectedMode,
         toggleSelection,
         handleSelectionChange,
         getSelectedLabel,
+        selectedMode
     };
 };
