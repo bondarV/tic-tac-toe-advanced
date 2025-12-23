@@ -6,7 +6,7 @@
     padding: var(--spacing-md, 1rem);
 }
 
-.displayList a {
+.linkItem {
     text-decoration: none;
     color: var(--color-text, #1a1a1a);
     font-weight: 500;
@@ -17,14 +17,14 @@
     border: 2px solid transparent;
 }
 
-.displayList a:hover {
+.linkItem:hover {
     background-color: var(--color-secondary, #FF8C00);
     color: white;
     border-color: var(--color-accent, black);
     transform: scale(1.05);
 }
 
-.displayList a:focus {
+.linkItem:focus {
     outline: 2px solid var(--color-accent, black);
     outline-offset: 2px;
 }

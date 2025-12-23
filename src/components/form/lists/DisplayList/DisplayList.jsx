@@ -16,6 +16,12 @@ function DisplayList({items = []}) {
                         </Link>
                     </ListItem>
                 ))}
+
+            <ListItem>
+                <Link to="/profile/player1" className={styles.linkItem}>
+                    Мій Профіль
+                </Link>
+            </ListItem>
         </ul>
     )
 }
