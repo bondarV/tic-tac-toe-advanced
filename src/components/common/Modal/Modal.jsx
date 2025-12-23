@@ -1,11 +1,27 @@
+import {useEffect} from 'react'; // Додаємо useEffect
 import {createPortal} from 'react-dom';
-import {Button} from '@/components/ui';
 import styles from './Modal.module.css';
-
 
 const modalRoot = document.getElementById('modal-root');
 
-export function Modal({isOpen, onClose, title, children, actions}) {
+export function Modal({isOpen, onClose, title, children}) {
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        if (isOpen) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isOpen, onClose]);
+
     if (!isOpen) return null;
 
     return createPortal(
@@ -17,9 +33,6 @@ export function Modal({isOpen, onClose, title, children, actions}) {
                 </div>
                 <div className={styles.body}>
                     {children}
-                </div>
-                <div className={styles.footer}>
-                    {actions || <Button onClick={onClose}>Close</Button>}
                 </div>
             </div>
         </div>,
