@@ -13,7 +13,8 @@ const componentsPages = {
         component: Gameplay,
         title: 'Gameplay',
         url: '/game',
-        id: 'game'
+        id: 'game',
+        hidden: true
     },
     results: {
         component: Stats,

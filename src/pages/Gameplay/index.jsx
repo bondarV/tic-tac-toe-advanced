@@ -7,7 +7,7 @@ import {Modal} from '@/components/common/Modal/Modal.jsx';
 import {GAME_STATUS} from '@/constants/game';
 import styles from './Gameplay.module.css';
 
-function Gameplay() {
+function Gameplay({onNavigate}) {
     const {settings} = useGameSettings();
     const {gameState, handleMove, resetGame} = useTicTacToe(settings.gridSize);
     const {seconds, start, stop, reset: resetTimer} = useTimer();
@@ -91,7 +91,7 @@ function Gameplay() {
                     <p>Час гри: {formatTime(seconds)}</p>
                     <div style={{marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center'}}>
                         <Button label="Зіграти ще раз" onClick={onRestart}/>
-                        <Button label="Вийти в меню" onClick={() => window.location.href = '/'}/>
+                        <Button label="Вийти в меню" onClick={() => onNavigate('start')}/>
                     </div>
                 </div>
             </Modal>

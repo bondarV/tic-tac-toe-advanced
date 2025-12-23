@@ -5,8 +5,7 @@ import {SettingsForm} from "@/components/form/SettingsForm/SettingsForm.jsx";
 import {Button} from "@/components/ui";
 import {useGameSettings} from "@/hooks/useGameSettings.js";
 
-export function Introduction() {
-    // 'menu' | 'settings' | 'game-selection'
+export function Introduction({onNavigate}) {
     const [view, setView] = useState('menu');
     const {settings, saveSettings} = useGameSettings();
 
@@ -25,7 +24,7 @@ export function Introduction() {
                     <div className={styles.menuButtons}>
                         <Button
                             label="Миттєвий двобій"
-                            onClick={() => setView('game-selection')}
+                            onClick={() => onNavigate('game')}
                             className={styles.menuBtn}
                         />
                         <Button
@@ -56,7 +55,7 @@ export function Introduction() {
 
             {view === 'game-selection' && (
                 <div className={styles.contentContainer}>
-                    <GameSelection/>
+                    <GameSelection onStartGame={() => onNavigate('game')}/>
                     <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'center'}}>
                         <Button
                             label="Назад в меню"
