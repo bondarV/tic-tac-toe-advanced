@@ -7,6 +7,7 @@ import {Gameplay} from "@/pages/Gameplay/index.jsx";
 import {NotFound} from "@/pages/NotFound/index.jsx";
 import {GameProvider} from '@/context/GameContext';
 import {UserProfile} from "@/pages/UserProfile/index.jsx";
+import {Players} from "@/pages/Players/index.jsx";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Introduction/>}/>
                 <Route path="/game" element={<Gameplay/>}/>
+                <Route path="/players" element={<Players/>}/>
                 <Route path="/profile/:id" element={<UserProfile/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>

@@ -1,9 +1,12 @@
-import {Link} from 'react-router-dom'; // Імпорт Link
+import {Link} from 'react-router-dom';
 import {ListItem} from "../ListItem/ListItem.jsx";
+import {useGame} from "@/context/GameContext";
 import styles from "./DisplayList.module.css";
 
 function DisplayList({items = []}) {
     const listItems = Array.isArray(items) ? items : Object.values(items);
+    const {getAllPlayers} = useGame();
+    const allPlayers = getAllPlayers();
 
     return (
         <ul className={styles.displayList}>
@@ -17,11 +20,13 @@ function DisplayList({items = []}) {
                     </ListItem>
                 ))}
 
-            <ListItem>
-                <Link to="/profile/player1" className={styles.linkItem}>
-                    Мій Профіль
-                </Link>
-            </ListItem>
+            {allPlayers.length > 0 && (
+                <ListItem>
+                    <Link to="/players" className={styles.linkItem} title="Профілі гравців">
+                        Гравці
+                    </Link>
+                </ListItem>
+            )}
         </ul>
     )
 }
