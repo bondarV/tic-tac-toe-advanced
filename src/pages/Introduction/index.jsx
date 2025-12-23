@@ -16,15 +16,13 @@ export function Introduction({onNavigate}) {
 
     return (
         <div className={styles.introductionPageContainer}>
-
-            {/* --- ГОЛОВНЕ МЕНЮ --- */}
             {view === 'menu' && (
                 <div className={styles.menuContainer}>
                     <h1 className={styles.gameTitle}>TIC TAC TOE</h1>
                     <div className={styles.menuButtons}>
                         <Button
-                            label="Миттєвий двобій"
-                            onClick={() => setView('game-selection')}
+                            label="Грати"
+                            onClick={() => onNavigate('game')}
                             className={styles.menuBtn}
                         />
                         <Button

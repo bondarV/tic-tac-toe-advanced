@@ -73,7 +73,7 @@ function Gameplay({onNavigate}) {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <div>Time: {formatTime(timeDisplay)}</div>
+                <div>Час: {formatTime(timeDisplay)}</div>
                 <div>
                     Хід: {gameState.isXNext ? settings.playerX : settings.playerO} ({gameState.isXNext ? 'X' : 'O'})
                 </div>
@@ -98,11 +98,20 @@ function Gameplay({onNavigate}) {
                 })}
             </div>
 
-            <Button
-                label="Restart Game"
-                onClick={onRestart}
-                className={styles.restartBtn}
-            />
+            <div className={styles.actions}>
+                <Button
+                    label="Почати знову"
+                    onClick={onRestart}
+                />
+                <Button
+                    label="В меню"
+                    onClick={() => onNavigate('start')}
+                />
+                <Button
+                    label="Налаштування"
+                    onClick={() => onNavigate('settings')}
+                />
+            </div>
 
             <Modal
                 isOpen={isModalOpen}
@@ -114,6 +123,7 @@ function Gameplay({onNavigate}) {
                     <p>Час гри: {formatTime(seconds)}</p>
                     <div style={{marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center'}}>
                         <Button label="Зіграти ще раз" onClick={onRestart}/>
+                        <Button label="Налаштування" onClick={() => onNavigate('settings')}/>
                         <Button label="Вийти в меню" onClick={() => onNavigate('start')}/>
                     </div>
                 </div>
