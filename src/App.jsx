@@ -1,18 +1,26 @@
 import './App.css';
+import {Route, Routes} from 'react-router-dom';
 import {componentsPages} from './data/pagesMeta.js';
-import {useState} from "react";
 import {NavBar} from "@/components/layout/index.jsx";
+import {Introduction} from "@/pages/Introduction/index.jsx";
+import {Gameplay} from "@/pages/Gameplay/index.jsx";
+import {NotFound} from "@/pages/NotFound/index.jsx";
+import {GameProvider} from '@/context/GameContext';
+import {UserProfile} from "@/pages/UserProfile/index.jsx";
+import {Players} from "@/pages/Players/index.jsx";
 
 function App() {
-    const defaultPage = 'start';
-    const [currentPage, setCurrentPage] = useState(defaultPage);
-
-    const ActivePage = componentsPages[currentPage].component;
     return (
-        <>
-            {<NavBar pages={componentsPages} changeActivePage={setCurrentPage}/>}
-            {<ActivePage onNavigate={setCurrentPage}/>}
-        </>
+        <GameProvider>
+            <NavBar pages={componentsPages}/>
+            <Routes>
+                <Route path="/" element={<Introduction/>}/>
+                <Route path="/game" element={<Gameplay/>}/>
+                <Route path="/players" element={<Players/>}/>
+                <Route path="/profile/:id" element={<UserProfile/>}/>
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
+        </GameProvider>
     );
 }
 
