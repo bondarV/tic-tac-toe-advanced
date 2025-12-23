@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import styles from './index.module.css';
-import {GameSelection} from "./GameSelection.jsx";
 import {SettingsForm} from "@/components/form/SettingsForm/SettingsForm.jsx";
 import {Button} from "@/components/ui";
 import {useGame} from "@/context/GameContext";
@@ -22,7 +21,7 @@ export function Introduction() {
                 <div className={styles.menuContainer}>
                     <h1 className={styles.gameTitle}>TIC TAC TOE</h1>
                     <div className={styles.menuButtons}>
-                        <Button label="Грати" onClick={() => setView('game-selection')}/>
+                        <Button label="Грати" onClick={() => navigate('/game')}/>
                         <Button label="Налаштування" onClick={() => setView('settings')}/>
                     </div>
                 </div>
@@ -30,12 +29,6 @@ export function Introduction() {
             {view === 'settings' && (
                 <div className={styles.contentContainer}>
                     <SettingsForm initialSettings={settings} onSave={handleSaveSettings}/>
-                    <Button label="Назад" onClick={() => setView('menu')}/>
-                </div>
-            )}
-            {view === 'game-selection' && (
-                <div className={styles.contentContainer}>
-                    <GameSelection onStartGame={() => navigate('/game')}/>
                     <Button label="Назад" onClick={() => setView('menu')}/>
                 </div>
             )}
