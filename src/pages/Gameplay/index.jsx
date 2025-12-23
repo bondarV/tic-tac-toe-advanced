@@ -13,14 +13,14 @@ function Gameplay({onNavigate}) {
     const {seconds, start, stop, reset: resetTimer} = useTimer();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Перевірка таймера
+
     useEffect(() => {
         if (settings.timeLimit > 0 && seconds >= settings.timeLimit && gameState.status === GAME_STATUS.IN_PROGRESS) {
             handleTimeUp();
         }
     }, [seconds, settings.timeLimit, gameState.status, handleTimeUp]);
 
-    // Скидання таймера при зміні ходу (тільки якщо є ліміт часу)
+
     useEffect(() => {
         if (settings.timeLimit > 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
             resetTimer();
@@ -28,7 +28,7 @@ function Gameplay({onNavigate}) {
         }
     }, [gameState.isXNext, settings.timeLimit, gameState.status, resetTimer, start]);
 
-    // Зупиняємо таймер, коли гра завершується
+
     useEffect(() => {
         if (gameState.status !== GAME_STATUS.IN_PROGRESS) {
             stop();
@@ -37,7 +37,6 @@ function Gameplay({onNavigate}) {
     }, [gameState.status, stop]);
 
     const onCellClick = (index) => {
-        // Запускаємо таймер при першому ході (якщо немає ліміту часу)
         if (settings.timeLimit === 0 && seconds === 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
             start();
         }
@@ -107,10 +106,6 @@ function Gameplay({onNavigate}) {
                     label="В меню"
                     onClick={() => onNavigate('start')}
                 />
-                <Button
-                    label="Налаштування"
-                    onClick={() => onNavigate('settings')}
-                />
             </div>
 
             <Modal
@@ -123,7 +118,6 @@ function Gameplay({onNavigate}) {
                     <p>Час гри: {formatTime(seconds)}</p>
                     <div style={{marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center'}}>
                         <Button label="Зіграти ще раз" onClick={onRestart}/>
-                        <Button label="Налаштування" onClick={() => onNavigate('settings')}/>
                         <Button label="Вийти в меню" onClick={() => onNavigate('start')}/>
                     </div>
                 </div>
