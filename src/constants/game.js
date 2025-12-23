@@ -7,7 +7,8 @@ export const SYMBOLS = {
 export const GAME_STATUS = {
     IN_PROGRESS: 'IN_PROGRESS',
     WIN: 'WIN',
-    DRAW: 'DRAW'
+    DRAW: 'DRAW',
+    TIME_UP: 'TIME_UP'
 };
 
 export const BOARD_SIZE = 9;

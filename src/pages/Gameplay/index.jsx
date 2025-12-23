@@ -9,9 +9,24 @@ import styles from './Gameplay.module.css';
 
 function Gameplay({onNavigate}) {
     const {settings} = useGameSettings();
-    const {gameState, handleMove, resetGame} = useTicTacToe(settings.gridSize);
+    const {gameState, handleMove, resetGame, handleTimeUp} = useTicTacToe(settings.gridSize);
     const {seconds, start, stop, reset: resetTimer} = useTimer();
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Перевірка таймера
+    useEffect(() => {
+        if (settings.timeLimit > 0 && seconds >= settings.timeLimit && gameState.status === GAME_STATUS.IN_PROGRESS) {
+            handleTimeUp();
+        }
+    }, [seconds, settings.timeLimit, gameState.status, handleTimeUp]);
+
+    // Скидання таймера при зміні ходу (тільки якщо є ліміт часу)
+    useEffect(() => {
+        if (settings.timeLimit > 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
+            resetTimer();
+            start();
+        }
+    }, [gameState.isXNext, settings.timeLimit, gameState.status, resetTimer, start]);
 
     // Зупиняємо таймер, коли гра завершується
     useEffect(() => {
@@ -22,8 +37,8 @@ function Gameplay({onNavigate}) {
     }, [gameState.status, stop]);
 
     const onCellClick = (index) => {
-        // Запускаємо таймер при першому ході
-        if (seconds === 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
+        // Запускаємо таймер при першому ході (якщо немає ліміту часу)
+        if (settings.timeLimit === 0 && seconds === 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
             start();
         }
         handleMove(index);
@@ -43,14 +58,22 @@ function Gameplay({onNavigate}) {
 
     const getWinnerText = () => {
         if (gameState.status === GAME_STATUS.DRAW) return "Нічия!";
+        if (gameState.status === GAME_STATUS.TIME_UP) {
+            const winnerName = gameState.winner === 'X' ? settings.playerX : settings.playerO;
+            return `Час вичерпано! Переможець: ${winnerName}!`;
+        }
         const winnerName = gameState.winner === 'X' ? settings.playerX : settings.playerO;
         return `Переможець: ${winnerName}!`;
     };
 
+    const timeDisplay = settings.timeLimit > 0
+        ? Math.max(0, settings.timeLimit - seconds)
+        : seconds;
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <div>Time: {formatTime(seconds)}</div>
+                <div>Time: {formatTime(timeDisplay)}</div>
                 <div>
                     Хід: {gameState.isXNext ? settings.playerX : settings.playerO} ({gameState.isXNext ? 'X' : 'O'})
                 </div>

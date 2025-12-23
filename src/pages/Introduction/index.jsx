@@ -24,7 +24,7 @@ export function Introduction({onNavigate}) {
                     <div className={styles.menuButtons}>
                         <Button
                             label="Миттєвий двобій"
-                            onClick={() => onNavigate('game')}
+                            onClick={() => setView('game-selection')}
                             className={styles.menuBtn}
                         />
                         <Button

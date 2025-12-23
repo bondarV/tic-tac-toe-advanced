@@ -52,5 +52,15 @@ export const useTicTacToe = (gridSize = 3) => {
         setGameState(createInitialState(gridSize));
     }, [gridSize, createInitialState]);
 
-    return {gameState, handleMove, resetGame};
+    const handleTimeUp = useCallback(() => {
+        if (gameState.status !== GAME_STATUS.IN_PROGRESS) return;
+
+        setGameState(prev => ({
+            ...prev,
+            status: GAME_STATUS.TIME_UP,
+            winner: prev.isXNext ? SYMBOLS.O : SYMBOLS.X
+        }));
+    }, [gameState.status]);
+
+    return {gameState, handleMove, resetGame, handleTimeUp};
 };
