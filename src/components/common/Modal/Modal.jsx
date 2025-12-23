@@ -1,6 +1,6 @@
-import {useEffect} from 'react'; // Додаємо useEffect
 import {createPortal} from 'react-dom';
 import styles from './Modal.module.css';
+import {useEffect} from "react";
 
 const modalRoot = document.getElementById('modal-root');
 

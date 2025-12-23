@@ -9,7 +9,7 @@ import styles from './Gameplay.module.css';
 
 function Gameplay() {
     const {settings} = useGameSettings();
-    const {gameState, handleMove, resetGame} = useTicTacToe();
+    const {gameState, handleMove, resetGame} = useTicTacToe(settings.gridSize);
     const {seconds, start, stop, reset: resetTimer} = useTimer();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -56,7 +56,10 @@ function Gameplay() {
                 </div>
             </div>
 
-            <div className={styles.board}>
+            <div
+                className={styles.board}
+                style={{gridTemplateColumns: `repeat(${settings.gridSize}, 1fr)`}}
+            >
                 {gameState.board.map((cell, index) => {
                     const isWinningCell = gameState.winningLine?.includes(index);
                     return (

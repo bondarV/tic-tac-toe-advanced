@@ -1,9 +1,21 @@
-import {useCallback, useState} from 'react';
-import {GAME_STATUS, INITIAL_GAME_STATE, SYMBOLS} from '@/constants/game';
+import {useCallback, useEffect, useState} from 'react';
+import {GAME_STATUS, SYMBOLS} from '@/constants/game';
 import {calculateWinner, isDraw} from '@/utils/calculateWinner';
 
-export const useTicTacToe = () => {
-    const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
+export const useTicTacToe = (gridSize = 3) => {
+    const createInitialState = useCallback((size) => ({
+        board: Array(size * size).fill(SYMBOLS.EMPTY),
+        isXNext: true,
+        status: GAME_STATUS.IN_PROGRESS,
+        winner: null,
+        winningLine: null
+    }), []);
+
+    const [gameState, setGameState] = useState(() => createInitialState(gridSize));
+
+    useEffect(() => {
+        setGameState(createInitialState(gridSize));
+    }, [gridSize, createInitialState]);
 
     const handleMove = useCallback((index) => {
         if (gameState.board[index] || gameState.status !== GAME_STATUS.IN_PROGRESS) {
@@ -37,8 +49,8 @@ export const useTicTacToe = () => {
     }, [gameState]);
 
     const resetGame = useCallback(() => {
-        setGameState(INITIAL_GAME_STATE);
-    }, []);
+        setGameState(createInitialState(gridSize));
+    }, [gridSize, createInitialState]);
 
     return {gameState, handleMove, resetGame};
 };

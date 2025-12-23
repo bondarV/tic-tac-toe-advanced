@@ -8,6 +8,7 @@ const schema = yup.object({
     playerX: yup.string().required("Ім'я гравця X обов'язкове").min(2, "Мін. 2 символи"),
     playerO: yup.string().required("Ім'я гравця O обов'язкове").min(2, "Мін. 2 символи"),
     timeLimit: yup.number().min(0, "Не може бути від'ємним").typeError('Має бути числом'),
+    gridSize: yup.number().min(3, "Мін. 3x3").max(10, "Макс. 10x10").typeError('Має бути числом').required(),
 }).required();
 
 export function SettingsForm({initialSettings, onSave}) {
@@ -39,6 +40,12 @@ export function SettingsForm({initialSettings, onSave}) {
                 <label>Таймер (сек, 0 = без обмежень):</label>
                 <input type="number" {...register("timeLimit")} />
                 <p className={styles.error}>{errors.timeLimit?.message}</p>
+            </div>
+
+            <div className={styles.field}>
+                <label>Розмір поля (3-10):</label>
+                <input type="number" {...register("gridSize")} />
+                <p className={styles.error}>{errors.gridSize?.message}</p>
             </div>
 
             <Button type="submit" label="Зберегти налаштування"/>
