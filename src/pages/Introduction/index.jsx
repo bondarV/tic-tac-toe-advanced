@@ -1,13 +1,15 @@
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import styles from './index.module.css';
 import {GameSelection} from "./GameSelection.jsx";
 import {SettingsForm} from "@/components/form/SettingsForm/SettingsForm.jsx";
 import {Button} from "@/components/ui";
-import {useGameSettings} from "@/hooks/useGameSettings.js";
+import {useGame} from "@/context/GameContext";
 
-export function Introduction({onNavigate}) {
+export function Introduction() {
     const [view, setView] = useState('menu');
-    const {settings, saveSettings} = useGameSettings();
+    const {settings, saveSettings} = useGame(); // Дані з контексту
+    const navigate = useNavigate();
 
     const handleSaveSettings = (newSettings) => {
         saveSettings(newSettings);
@@ -20,46 +22,21 @@ export function Introduction({onNavigate}) {
                 <div className={styles.menuContainer}>
                     <h1 className={styles.gameTitle}>TIC TAC TOE</h1>
                     <div className={styles.menuButtons}>
-                        <Button
-                            label="Грати"
-                            onClick={() => onNavigate('game')}
-                            className={styles.menuBtn}
-                        />
-                        <Button
-                            label="Налаштування"
-                            onClick={() => setView('settings')}
-                            className={styles.menuBtn}
-                        />
+                        <Button label="Грати" onClick={() => setView('game-selection')}/>
+                        <Button label="Налаштування" onClick={() => setView('settings')}/>
                     </div>
                 </div>
             )}
-
-            {/* --- НАЛАШТУВАННЯ --- */}
             {view === 'settings' && (
                 <div className={styles.contentContainer}>
-                    <h2>Налаштування гри</h2>
-                    <SettingsForm
-                        initialSettings={settings}
-                        onSave={handleSaveSettings}
-                    />
-                    <div style={{marginTop: '1rem'}}>
-                        <Button
-                            label="Назад"
-                            onClick={() => setView('menu')}
-                        />
-                    </div>
+                    <SettingsForm initialSettings={settings} onSave={handleSaveSettings}/>
+                    <Button label="Назад" onClick={() => setView('menu')}/>
                 </div>
             )}
-
             {view === 'game-selection' && (
                 <div className={styles.contentContainer}>
-                    <GameSelection onStartGame={() => onNavigate('game')}/>
-                    <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'center'}}>
-                        <Button
-                            label="Назад в меню"
-                            onClick={() => setView('menu')}
-                        />
-                    </div>
+                    <GameSelection onStartGame={() => navigate('/game')}/>
+                    <Button label="Назад" onClick={() => setView('menu')}/>
                 </div>
             )}
         </div>

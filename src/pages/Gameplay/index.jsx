@@ -1,14 +1,16 @@
 import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {useTicTacToe} from '@/hooks/useTicTacToe.js';
 import {useTimer} from '@/hooks/useTimer';
-import {useGameSettings} from '@/hooks/useGameSettings';
+import {useGame} from '@/context/GameContext';
 import {Button} from '@/components/ui';
 import {Modal} from '@/components/common/Modal/Modal.jsx';
 import {GAME_STATUS} from '@/constants/game';
 import styles from './Gameplay.module.css';
 
-function Gameplay({onNavigate}) {
-    const {settings} = useGameSettings();
+function Gameplay() {
+    const {settings} = useGame();
+    const navigate = useNavigate();
     const {gameState, handleMove, resetGame, handleTimeUp} = useTicTacToe(settings.gridSize);
     const {seconds, start, stop, reset: resetTimer} = useTimer();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -104,7 +106,7 @@ function Gameplay({onNavigate}) {
                 />
                 <Button
                     label="В меню"
-                    onClick={() => onNavigate('start')}
+                    onClick={() => navigate('/')}
                 />
             </div>
 
@@ -118,7 +120,7 @@ function Gameplay({onNavigate}) {
                     <p>Час гри: {formatTime(seconds)}</p>
                     <div style={{marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center'}}>
                         <Button label="Зіграти ще раз" onClick={onRestart}/>
-                        <Button label="Вийти в меню" onClick={() => onNavigate('start')}/>
+                        <Button label="Вийти в меню" onClick={() => navigate('/')}/>
                     </div>
                 </div>
             </Modal>
