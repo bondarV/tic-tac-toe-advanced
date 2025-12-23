@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useTicTacToe} from '@/hooks/useTicTacToe.js';
 import {useTimer} from '@/hooks/useTimer';
@@ -9,11 +9,12 @@ import {GAME_STATUS} from '@/constants/game';
 import styles from './Gameplay.module.css';
 
 function Gameplay() {
-    const {settings} = useGame();
+    const {settings, addGameResult} = useGame();
     const navigate = useNavigate();
     const {gameState, handleMove, resetGame, handleTimeUp} = useTicTacToe(settings.gridSize);
     const {seconds, start, stop, reset: resetTimer} = useTimer();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const isGameSavedRef = useRef(false);
 
 
     useEffect(() => {
@@ -27,6 +28,7 @@ function Gameplay() {
         if (settings.timeLimit > 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
             resetTimer();
             start();
+            isGameSavedRef.current = false;
         }
     }, [gameState.isXNext, settings.timeLimit, gameState.status, resetTimer, start]);
 
@@ -35,12 +37,34 @@ function Gameplay() {
         if (gameState.status !== GAME_STATUS.IN_PROGRESS) {
             stop();
             setIsModalOpen(true);
+
+            if (!isGameSavedRef.current) {
+                let winnerName = null;
+                if (gameState.winner === 'X') winnerName = settings.playerX;
+                if (gameState.winner === 'O') winnerName = settings.playerO;
+
+                const gameResult = {
+                    id: Date.now(),
+                    date: new Date().toISOString(),
+                    playerX: settings.playerX,
+                    playerO: settings.playerO,
+                    winner: winnerName,
+                    status: gameState.status,
+                    duration: seconds,
+                    gridSize: settings.gridSize
+                };
+
+                addGameResult(gameResult);
+                isGameSavedRef.current = true;
+            }
         }
-    }, [gameState.status, stop]);
+    }, [gameState.status, stop, settings.playerX, settings.playerO, gameState.winner, seconds, addGameResult, settings.gridSize]);
+
 
     const onCellClick = (index) => {
         if (settings.timeLimit === 0 && seconds === 0 && gameState.status === GAME_STATUS.IN_PROGRESS) {
             start();
+            isGameSavedRef.current = false;
         }
         handleMove(index);
     };
@@ -49,6 +73,7 @@ function Gameplay() {
         resetGame();
         resetTimer();
         setIsModalOpen(false);
+        isGameSavedRef.current = false;
     };
 
     const formatTime = (secs) => {
