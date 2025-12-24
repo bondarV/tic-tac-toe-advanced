@@ -1,35 +1,34 @@
 import {useMemo, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useGame} from '@/context/GameContext';
+import {useSelector} from 'react-redux';
+import {selectAllPlayers, selectPlayerStats} from '@/store/slices/resultsSlice';
 import {Button} from '@/components/ui';
 import styles from './Players.module.css';
 
 export function Players() {
     const navigate = useNavigate();
-    const {getAllPlayers, getPlayerStats} = useGame();
     const [searchTerm, setSearchTerm] = useState('');
-    const [sortBy, setSortBy] = useState('wins'); // 'wins', 'games', 'winRate'
+    const [sortBy, setSortBy] = useState('wins');
 
-    const allPlayers = getAllPlayers();
+    const allPlayersNames = useSelector(selectAllPlayers);
+    const fullState = useSelector(state => state);
 
     const playersWithStats = useMemo(() => {
-        return allPlayers.map(playerName => ({
+        return allPlayersNames.map(playerName => ({
             name: playerName,
-            stats: getPlayerStats(playerName)
+            stats: selectPlayerStats(fullState, playerName)
         }));
-    }, [allPlayers, getPlayerStats]);
+    }, [allPlayersNames, fullState]);
 
     const filteredAndSortedPlayers = useMemo(() => {
         let result = [...playersWithStats];
 
-        // Filter
         if (searchTerm) {
             result = result.filter(p =>
                 p.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
 
-        // Sort
         result.sort((a, b) => {
             switch (sortBy) {
                 case 'wins':
@@ -47,7 +46,7 @@ export function Players() {
         return result;
     }, [playersWithStats, searchTerm, sortBy]);
 
-    if (allPlayers.length === 0) {
+    if (playersWithStats.length === 0) {
         return (
             <div className={styles.container}>
                 <div className={styles.card}>
