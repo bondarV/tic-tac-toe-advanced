@@ -43,19 +43,14 @@ export const GameProvider = ({children}) => {
         );
 
         const wins = playerGames.filter(game => {
-            // Перевіряємо, чи записане ім'я переможця збігається з ім'ям гравця
             return game.winner === playerName;
         }).length;
 
         const losses = playerGames.filter(game => {
-            // Поразка: є переможець (не null/draw), і це не поточний гравець
-            // Додаткова перевірка !== 'draw' на випадок, якщо ви зміните логіку збереження нічиїх
             return game.winner && game.winner !== playerName && game.winner !== 'draw';
         }).length;
 
         const draws = playerGames.filter(game => {
-            // У вашому Gameplay нічия зберігається як null (або статус != WIN)
-            // Тому перевіряємо на null або рядок 'draw' для надійності
             return !game.winner || game.winner === 'draw';
         }).length;
 
