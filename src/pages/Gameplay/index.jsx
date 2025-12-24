@@ -1,15 +1,18 @@
 import {useEffect, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import {useTicTacToe} from '@/hooks/useTicTacToe.js';
 import {useTimer} from '@/hooks/useTimer';
-import {useGame} from '@/context/GameContext';
 import {Button} from '@/components/ui';
 import {Modal} from '@/components/common/Modal/Modal.jsx';
 import {GAME_STATUS} from '@/constants/game';
 import styles from './Gameplay.module.css';
+import {addGameResult} from "@/store/slices/resultsSlice.js";
+import {selectSettings} from "@/store/slices/settingsSlice.js";
 
 function Gameplay() {
-    const {settings, addGameResult} = useGame();
+    const dispatch = useDispatch();
+    const settings = useSelector(selectSettings);
     const navigate = useNavigate();
     const {gameState, handleMove, resetGame, handleTimeUp} = useTicTacToe(settings.gridSize);
     const {seconds, start, stop, reset: resetTimer} = useTimer();
@@ -54,11 +57,11 @@ function Gameplay() {
                     gridSize: settings.gridSize
                 };
 
-                addGameResult(gameResult);
+                dispatch(addGameResult(gameResult));
                 isGameSavedRef.current = true;
             }
         }
-    }, [gameState.status, stop, settings.playerX, settings.playerO, gameState.winner, seconds, addGameResult, settings.gridSize]);
+    }, [gameState.status, stop, settings.playerX, settings.playerO, gameState.winner, seconds, dispatch, settings.gridSize]);
 
 
     const onCellClick = (index) => {

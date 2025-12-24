@@ -1,12 +1,14 @@
 import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import {ListItem} from "../ListItem/ListItem.jsx";
-import {useGame} from "@/context/GameContext";
+import {selectHistory} from "@/store/slices/resultsSlice";
 import styles from "./DisplayList.module.css";
 
 function DisplayList({items = []}) {
     const listItems = Array.isArray(items) ? items : Object.values(items);
-    const {getAllPlayers} = useGame();
-    const allPlayers = getAllPlayers();
+
+    const history = useSelector(selectHistory);
+    const hasPlayers = history.length > 0;
 
     return (
         <ul className={styles.displayList}>
@@ -20,7 +22,7 @@ function DisplayList({items = []}) {
                     </ListItem>
                 ))}
 
-            {allPlayers.length > 0 && (
+            {hasPlayers && (
                 <ListItem>
                     <Link to="/players" className={styles.linkItem} title="Профілі гравців">
                         Гравці

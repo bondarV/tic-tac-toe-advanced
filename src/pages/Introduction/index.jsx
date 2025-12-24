@@ -1,17 +1,20 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import styles from './index.module.css';
 import {SettingsForm} from "@/components/form/SettingsForm/SettingsForm.jsx";
 import {Button} from "@/components/ui";
-import {useGame} from "@/context/GameContext";
+import {selectSettings, updateSettings} from "@/store/slices/settingsSlice";
 
 export function Introduction() {
     const [view, setView] = useState('menu');
-    const {settings, saveSettings} = useGame();
     const navigate = useNavigate();
 
+    const settings = useSelector(selectSettings);
+    const dispatch = useDispatch();
+
     const handleSaveSettings = (newSettings) => {
-        saveSettings(newSettings);
+        dispatch(updateSettings(newSettings));
         setView('menu');
     };
 
