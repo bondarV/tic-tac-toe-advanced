@@ -57,3 +57,29 @@
 .restartBtn {
     margin-top: 1rem;
 }
+
+.resultSummary {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.resultStat {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.04);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.resultLabel {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.resultValue {
+    color: #0f172a;
+    font-weight: 700;
+    text-align: right;
+}

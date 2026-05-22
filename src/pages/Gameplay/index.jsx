@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useTicTacToe} from '@/hooks/useTicTacToe.js';
 import {useTimer} from '@/hooks/useTimer';
 import {Button} from '@/components/ui';
-import {Modal} from '@/components/common/Modal/Modal.jsx';
+import {Popup} from '@/components/common/Popup/Popup.jsx';
 import {GAME_STATUS} from '@/constants/game';
 import styles from './Gameplay.module.css';
 import {addGameResult} from "@/store/slices/resultsSlice.js";
@@ -18,6 +18,11 @@ function Gameplay() {
     const {seconds, start, stop, reset: resetTimer} = useTimer();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const isGameSavedRef = useRef(false);
+    const popupTone = gameState.status === GAME_STATUS.DRAW
+        ? 'warning'
+        : gameState.status === GAME_STATUS.TIME_UP
+            ? 'danger'
+            : 'success';
 
 
     useEffect(() => {
@@ -138,20 +143,42 @@ function Gameplay() {
                 />
             </div>
 
-            <Modal
+            <Popup
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 title="Гра завершена"
+                subtitle={getWinnerText()}
+                tone={popupTone}
+                actions={[
+                    {
+                        label: 'Зіграти ще раз',
+                        onClick: onRestart,
+                        variant: 'primary'
+                    },
+                    {
+                        label: 'Вийти в меню',
+                        onClick: () => navigate('/'),
+                        variant: 'secondary'
+                    }
+                ]}
             >
-                <div style={{textAlign: 'center'}}>
-                    <h3>{getWinnerText()}</h3>
-                    <p>Час гри: {formatTime(seconds)}</p>
-                    <div style={{marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center'}}>
-                        <Button label="Зіграти ще раз" onClick={onRestart}/>
-                        <Button label="Вийти в меню" onClick={() => navigate('/')}/>
+                <div className={styles.resultSummary}>
+                    <div className={styles.resultStat}>
+                        <span className={styles.resultLabel}>Час гри</span>
+                        <span className={styles.resultValue}>{formatTime(seconds)}</span>
+                    </div>
+                    <div className={styles.resultStat}>
+                        <span className={styles.resultLabel}>Розмір поля</span>
+                        <span className={styles.resultValue}>{settings.gridSize}×{settings.gridSize}</span>
+                    </div>
+                    <div className={styles.resultStat}>
+                        <span className={styles.resultLabel}>Статус</span>
+                        <span className={styles.resultValue}>
+                            {gameState.status === GAME_STATUS.DRAW ? 'Нічия' : gameState.status}
+                        </span>
                     </div>
                 </div>
-            </Modal>
+            </Popup>
         </div>
     );
 }
