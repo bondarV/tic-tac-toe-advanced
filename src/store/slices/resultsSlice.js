@@ -4,7 +4,7 @@ const loadHistory = () => {
     try {
         const saved = localStorage.getItem('tic-tac-toe-history');
         return saved ? JSON.parse(saved) : [];
-    } catch (e) {
+    } catch {
         return [];
     }
 };

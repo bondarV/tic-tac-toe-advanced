@@ -11,6 +11,26 @@ const schema = yup.object({
     gridSize: yup.number().min(3, "Мін. 3x3").max(10, "Макс. 10x10").typeError('Має бути числом').required(),
 }).required();
 
+/**
+ * @typedef {Object} GameSettings
+ * @property {string} playerX
+ * @property {string} playerO
+ * @property {number} timeLimit
+ * @property {number} gridSize
+ */
+
+/**
+ * @typedef {Object} SettingsFormProps
+ * @property {GameSettings} initialSettings - Initial values shown in the form.
+ * @property {function(GameSettings): void} onSave - Callback with validated form values.
+ */
+
+/**
+ * Form for managing player names and game rules.
+ *
+ * @param {SettingsFormProps} props
+ * @returns {JSX.Element}
+ */
 export function SettingsForm({initialSettings, onSave}) {
     const {register, handleSubmit, formState: {errors}} = useForm({
         defaultValues: initialSettings,

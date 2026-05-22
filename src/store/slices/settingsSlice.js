@@ -11,7 +11,7 @@ const loadSettings = () => {
     try {
         const saved = localStorage.getItem('tic-tac-toe-settings');
         return saved ? {...DEFAULT_SETTINGS, ...JSON.parse(saved)} : DEFAULT_SETTINGS;
-    } catch (e) {
+    } catch {
         return DEFAULT_SETTINGS;
     }
 };

@@ -4,6 +4,25 @@ import {useEffect} from "react";
 
 const modalRoot = document.getElementById('modal-root');
 
+/**
+ * React type aliases for JSDoc.
+ * @typedef {import('react').ReactNode} ReactNode
+ */
+
+/**
+ * @typedef {Object} ModalProps
+ * @property {boolean} isOpen - Controls modal visibility.
+ * @property {function(): void} onClose - Called on overlay click or Escape key.
+ * @property {string | ReactNode} title - Modal header title (string or node).
+ * @property {ReactNode} children - Modal body content.
+ */
+
+/**
+ * Generic modal window rendered through a portal.
+ *
+ * @param {ModalProps} props
+ * @returns {JSX.Element | null}
+ */
 export function Modal({isOpen, onClose, title, children}) {
 
     useEffect(() => {
