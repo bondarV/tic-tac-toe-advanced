@@ -1,6 +1,7 @@
 # Tic-Tac-Toe Game
 
-A modern React + Vite application implementing a classic Tic-Tac-Toe game with interactive UI, state management using Redux, and form handling with React Hook Form.
+A modern React + Vite application implementing a classic Tic-Tac-Toe game with interactive UI, state management using
+Redux, and form handling with React Hook Form.
 
 **Course:** KOP (Knowledge of Programming) / Frontend Development  
 **Author:** Vitalii Bondar  
@@ -9,6 +10,7 @@ A modern React + Vite application implementing a classic Tic-Tac-Toe game with i
 ## Project Overview
 
 This project demonstrates the integration of modern React development tools and best practices, including:
+
 - React 19 with Vite for fast development and optimized builds
 - Redux Toolkit for state management
 - React Router for navigation
@@ -18,12 +20,14 @@ This project demonstrates the integration of modern React development tools and 
 
 ## Demo
 
+<!-- TODO: Replace VIDEO_LINK_HERE with the final public demo URL before merging. -->
 🎮 **Video Demonstration:** [Watch the demo](VIDEO_LINK_HERE)
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -90,7 +94,18 @@ npm run build-storybook
 
 ### Documentation Generation
 
-For API documentation and component documentation, you can use JSDoc comments in your components:
+This project uses **JSDoc** for automatic code documentation generation.
+
+```bash
+# Generate HTML documentation from code comments
+npm run docs:code
+```
+
+Generated files are written to `docs/code/`.
+
+Note: the current JSDoc configuration documents only `.js` source files (it does not process `.jsx` files).
+
+Example JSDoc annotation:
 
 ```javascript
 /**
@@ -100,9 +115,9 @@ For API documentation and component documentation, you can use JSDoc comments in
  * @param {Function} props.onClick - Click handler
  * @returns {JSX.Element} Rendered button component
  */
-export const Button = ({ label, onClick }) => {
-  return <button onClick={onClick}>{label}</button>;
-};
+export const Button = ({label, onClick}) => {
+        return <button onClick={onClick}>{label}</button>;
+    };
 ```
 
 ## Project Structure
@@ -140,7 +155,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ### Dependency Licenses
 
-The dependency license report is committed to the repository for transparency. See the [License Report](license-report.txt) for details on all project dependencies and their respective licenses.
+The dependency license report is committed to the repository for transparency. See
+the [License Report](license-report.txt) for details on all project dependencies and their respective licenses.
 
 To regenerate the license report (after updating dependencies), run:
 
@@ -148,5 +164,6 @@ To regenerate the license report (after updating dependencies), run:
 npm run licenses:report
 ```
 
-This uses `license-checker` with relative paths and a sanitized plain-text output so the report does not leak local filesystem paths or email addresses.
+This uses `license-checker` with relative paths and a sanitized plain-text output so the report does not leak local
+filesystem paths or email addresses.
 

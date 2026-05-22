@@ -9,6 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "docs:code": "jsdoc -c jsdoc.config.json",
     "licenses:report": "node scripts/generate-license-report.mjs"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
+    "jsdoc": "^4.0.5",
     "license-checker": "25.0.1",
     "vite": "8.0.5",
     "vite-tsconfig-paths": "^5.1.4"

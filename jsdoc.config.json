@@ -1,0 +1,15 @@
+{
+  "source": {
+    "include": [
+      "src/utils",
+      "src/hooks",
+      "src/store"
+    ],
+    "includePattern": ".+\\.js$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "docs/code",
+    "recurse": true
+  }
+}
