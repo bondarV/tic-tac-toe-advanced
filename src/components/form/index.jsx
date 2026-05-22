@@ -1,4 +1,4 @@
-import  {ListItem} from "./lists/ListItem/ListItem.jsx";
-import  {SelectableList} from "./lists/SelectableList/SelectableList.jsx";
+import {ListItem} from "@/components/common/List/ListItem/ListItem.jsx";
+import {SelectableList} from "@/components/form/SelectableList/SelectableList.jsx";
 
-export {SelectableList,ListItem}
+export {SelectableList, ListItem}

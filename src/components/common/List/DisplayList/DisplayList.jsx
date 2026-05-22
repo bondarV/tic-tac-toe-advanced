@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {ListItem} from "../ListItem/ListItem.jsx";
-import {selectHistory} from "@/store/slices/resultsSlice";
+import {selectHistory} from "@/store/slices/resultsSlice.js";
 import styles from "./DisplayList.module.css";
 
 function DisplayList({items = []}) {

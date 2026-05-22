@@ -39,7 +39,7 @@ export function calculateWinner(squares) {
             return {winner: first, line: line};
         }
     }
-    return null;
+    return null
 }
 
 export function isDraw(squares) {
