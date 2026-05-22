@@ -6,7 +6,7 @@ const modalRoot = document.getElementById('modal-root');
 
 /**
  * React type aliases for JSDoc.
- * @typedef {import('react').ReactNode} ReactNode
+ * @typedef {*} ReactNode
  */
 
 /**
