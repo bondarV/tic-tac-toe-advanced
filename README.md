@@ -103,7 +103,7 @@ npm run docs:code
 
 Generated files are written to `docs/code/`.
 
-Note: the current JSDoc configuration documents only `.js` source files (it does not process `.jsx` files).
+Note: the current JSDoc configuration documents both `.js` and `.jsx` source files.
 
 Example JSDoc annotation:
 
