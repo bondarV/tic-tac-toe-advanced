@@ -178,11 +178,12 @@ export function Popup({
                                     onClick={onClick}
                                     variant={variant}
                                     disabled={disabled}
+                                    ariaLabel={false}
                                 />
                             ))
                         ) : (
                             showCloseAction && closeLabel ? (
-                                <Button label={closeLabel} onClick={onClose} variant="ghost" className={styles.closeAction} />
+                                <Button label={closeLabel} onClick={onClose} variant="ghost" className={styles.closeAction} ariaLabel={false} />
                             ) : null
                         )}
                     </div>

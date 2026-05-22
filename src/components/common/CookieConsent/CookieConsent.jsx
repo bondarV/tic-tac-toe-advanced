@@ -91,9 +91,9 @@ export default function CookieConsent() {
                         налаштувати вибір за категоріями.
                     </div>
                     <div className={styles.actions}>
-                        <Button label="Прийняти все" onClick={acceptAll} variant="primary" />
-                        <Button label="Відхилити все" onClick={rejectAll} variant="ghost" />
-                        <Button label="Налаштувати" onClick={openManage} variant="secondary" />
+                        <Button label="Прийняти все" onClick={acceptAll} variant="primary" ariaLabel={false} />
+                        <Button label="Відхилити все" onClick={rejectAll} variant="ghost" ariaLabel={false} />
+                        <Button label="Налаштувати" onClick={openManage} variant="secondary" ariaLabel={false} />
                     </div>
                 </div>
             </div>
@@ -139,8 +139,8 @@ export default function CookieConsent() {
                     </div>
 
                     <div className={styles.prefActions}>
-                        <Button label="Зберегти" onClick={savePreferences} variant="primary" />
-                        <Button label="Відмінити" onClick={() => setModalOpen(false)} variant="ghost" />
+                        <Button label="Зберегти" onClick={savePreferences} variant="primary" ariaLabel={false} />
+                        <Button label="Відмінити" onClick={() => setModalOpen(false)} variant="ghost" ariaLabel={false} />
                     </div>
                 </div>
             </Popup>
