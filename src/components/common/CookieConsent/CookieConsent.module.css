@@ -1,0 +1,73 @@
+.banner {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: min(100%, 980px);
+  background: linear-gradient(180deg, #ffffff, #fbfbfd);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.2);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.text {
+  flex: 1 1 auto;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.prefList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.prefItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed rgba(15, 23, 42, 0.06);
+}
+
+.prefMain {
+  flex: 1 1 auto;
+}
+
+.prefTitle {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.prefDesc {
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.prefControl {
+  flex: 0 0 auto;
+}
+
+.prefActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: flex-end;
+}
+

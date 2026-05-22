@@ -7,6 +7,7 @@ import {Gameplay} from "@/pages/Gameplay/index.jsx";
 import {NotFound} from "@/pages/NotFound/index.jsx";
 import {UserProfile} from "@/pages/UserProfile/index.jsx";
 import {Players} from "@/pages/Players/index.jsx";
+import CookieConsent from '@/components/common/CookieConsent/CookieConsent.jsx';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </main>
+            <CookieConsent />
         </div>
     );
 }

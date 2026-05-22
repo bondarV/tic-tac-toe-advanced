@@ -1,5 +1,18 @@
 import {useCallback, useRef, useState} from 'react';
 
+/**
+ * @typedef {Object} UseTimerApi
+ * @property {number} seconds - Elapsed seconds value.
+ * @property {function(): void} start - Starts timer if not running.
+ * @property {function(): void} stop - Stops timer.
+ * @property {function(): void} reset - Stops timer and resets seconds to 0.
+ */
+
+/**
+ * Provides a simple interval-based timer API for gameplay.
+ *
+ * @returns {UseTimerApi}
+ */
 export const useTimer = () => {
     const [seconds, setSeconds] = useState(0);
     const intervalRef = useRef(null);

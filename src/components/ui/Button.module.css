@@ -11,6 +11,40 @@
     border: 2px solid transparent;
 }
 
+/* primary is an explicit variant that aliases the base button look. It is intentionally empty
+   because the base `.button` class is always applied; having a `.primary` key keeps the
+   variant mapping symmetrical for all variants. */
+.primary {}
+
+.secondary {
+    background: rgba(255, 255, 255, 0.92);
+    color: #1f2937;
+    border-color: rgba(31, 41, 55, 0.14);
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.08);
+}
+
+.secondary:hover {
+    border-color: rgba(31, 41, 55, 0.22);
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+}
+
+.ghost {
+    background: transparent;
+    color: #1f2937;
+    border-color: rgba(31, 41, 55, 0.12);
+    box-shadow: none;
+}
+
+.ghost:hover {
+    background: rgba(15, 23, 42, 0.04);
+    box-shadow: none;
+}
+
+.danger {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+}
+
 .button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);

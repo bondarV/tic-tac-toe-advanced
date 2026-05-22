@@ -2,6 +2,29 @@ import {useCallback, useEffect, useState} from 'react';
 import {GAME_STATUS, SYMBOLS} from '@/constants/game';
 import {calculateWinner, isDraw} from '@/utils/calculateWinner';
 
+/**
+ * @typedef {Object} TicTacToeState
+ * @property {Array.<('X' | 'O' | null)>} board
+ * @property {boolean} isXNext
+ * @property {string} status
+ * @property {'X' | 'O' | null} winner
+ * @property {number[] | null} winningLine
+ */
+
+/**
+ * @typedef {Object} UseTicTacToeApi
+ * @property {TicTacToeState} gameState
+ * @property {function(number): void} handleMove
+ * @property {function(): void} resetGame
+ * @property {function(): void} handleTimeUp
+ */
+
+/**
+ * Manages Tic-Tac-Toe game state for variable board sizes.
+ *
+ * @param {number} [gridSize=3] - Board side size (e.g. 3 for 3x3).
+ * @returns {UseTicTacToeApi}
+ */
 export const useTicTacToe = (gridSize = 3) => {
     const createInitialState = useCallback((size) => ({
         board: Array(size * size).fill(SYMBOLS.EMPTY),
